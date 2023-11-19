@@ -1,38 +1,38 @@
-name: Make TWRP Device
+姓名:制造设备
 
-on:
-  workflow_dispatch:
-    inputs:
-      IMG_URL:    
-        description: 'IMG_URL'
-        required: true
-        default: ''
+ 在…上  :
+  工作流程  :
+    投入  :
+      img_url  :    
+        描述  : 'IMG_URL'
+        必需的  : 真实的
+        违约  : ''
 
-jobs:
-  build:
-    if: github.event.repository.owner.id == github.event.sender.id
-    runs-on: ubuntu-18.04
+ 乔布斯  :
+  建造  :
+    如果 :github.event.repository.owner.id == github.event.sender.id
+    逃跑 :ubuntu-20.04
     
-    steps:
-    - name: Check Out
-      uses: actions/checkout@main
+    台阶  :
+    - 姓名:退房
+      使用:行动/结账@主要
       
-    - name: Prepare the environment
-      run: |
-        sudo apt update
-        sudo apt -y install python python3 python-pip python3-pip cpio wget
-        pip3 install twrpdtgen
-        mkdir dt
+    - 姓名:准备环境
+      跑  : |
+        最新情况
+        安装巨蛇天蛇3天蛇3天蛇3
+        Pip3安饰Twrpdtkin
+        Dt
       
-    - name: Download boot or recovery img
-      run: |
+    - 姓名:下载引导或恢复
+      跑  : |
         aria2c "${{ github.event.inputs.IMG_URL }}"
-        ls
+        元素元素
       
-    - name: Start build
-      run: |
+    - 姓名:开始构建
+      跑 : |
         python3 -m twrpdtgen -o dt/ *.img
-    - name: ZIP device tree
+    - name:     -名称:邮政设备树
       run: |
         zip -r DeviceTree.zip ./dt
     - name: Upload to Release
